@@ -1,7 +1,9 @@
 import MyList from '@/components/MyList';
 <template>
   <ul class="todo-main">
-    <MyItem v-for="todoobj in todos" :key="todoobj.id" :todo="todoobj" />
+    <transition-group appear name="todo">
+      <MyItem v-for="todoobj in todos" :key="todoobj.id" :todo="todoobj" />
+    </transition-group>
   </ul>
 </template>
     
@@ -13,7 +15,7 @@ export default {
   props: ["todos"],
 };
 </script>
-    
+   
 <style scoped>
 /*main*/
 .todo-main {
@@ -30,5 +32,19 @@ export default {
   border-radius: 2px;
   padding-left: 5px;
   margin-top: 10px;
+}
+.todo-enter-active {
+  animation: animation 0.5s linear;
+}
+.todo-leave-active {
+  animation: animation 0.5s linear reverse;
+}
+@keyframes animation {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0px);
+  }
 }
 </style>
